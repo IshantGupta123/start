@@ -2,7 +2,7 @@ var PLAY = 1;
 var END=0;
 var gameState = 1;
 var alien,end,sword,sword2,enemyGroup;
-var fruitGroup,fruit1,fruit2,fruit,fruit4;
+var fruitGroup,fruit1,fruit2,fruit,fruit4,egame,csound;
 var score;
 
 function preload(){
@@ -14,15 +14,14 @@ function preload(){
   fruit4=loadImage("fruit4.png");
   alien=loadImage("alien1.png");
   end=loadImage("gameover.png")
+  egame=loadSound("gameover.mp3");
+  csound=loadSound("knifeSwooshSound.mp3");
   
   
  
 }
   function setup() {
-
   createCanvas(600, 500);
-  var message ="This is a message"
-  console.log(message);
     sword1=createSprite(40,200,20,20);
     sword1.addImage(sword);
     sword1.velocityX=1;
@@ -41,11 +40,11 @@ function preload(){
 function draw(){
   background(100);
    
-if(sword1.isTouching(fruitGroup))or(sword.y<80){
+if(sword1.isTouching(fruitGroup)){
    fruitGroup.destroyEach();
   score=score+2;
   
-
+csound.play();
 }
   
   
@@ -57,6 +56,7 @@ if(sword1.isTouching(fruitGroup))or(sword.y<80){
     sword1.x=World.mouseX;
      if(sword1.isTouching(enemyGroup)){
   gameState = END;
+       egame.play();
   }
     fruits();
   Enemy();
